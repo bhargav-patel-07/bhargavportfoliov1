@@ -1,10 +1,27 @@
 import BlogCard from '@/components/BlogCard';
-import { mockBlogPosts } from '@/data/mockData';
 import { GridPattern } from '@/components/ui/grid-pattern';
 import { FloatingDock } from '@/components/FloatingDock';
 import { House, Info, Monitor, User, Package } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabaseClient'; // adjust path if needed
 
 const Blog = () => {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*');
+      if (error) {
+        setBlogs([]);
+      } else {
+        setBlogs(data || []);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
   const dockItems = [
     { title: 'Home', icon: <House className="h-4 w-4" />, href: '/' },
     { title: 'Projects', icon: <Monitor className="h-4 w-4" />, href: '/projects' },
@@ -36,8 +53,19 @@ const Blog = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mockBlogPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
+            {blogs.map((post) => (
+              <BlogCard
+                key={post.id}
+                post={{
+                  id: post.id,
+                  title: post.title,
+                  excerpt: post.excerpt,
+                  content: post.content,
+                  image: post.image_url,
+                  tags: post.tags,
+                  date: post.published_at,
+                }}
+              />
             ))}
           </div>
         </div>

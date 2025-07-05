@@ -1,9 +1,8 @@
-import { technologies as initialTechnologies } from '../data/technologies';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 export function TechStack() {
-  const [technologies, setTechnologies] = useState(initialTechnologies);
+  const [technologies, setTechnologies] = useState([]);
 
   // Define the function
   const fetchTechnologies = async () => {

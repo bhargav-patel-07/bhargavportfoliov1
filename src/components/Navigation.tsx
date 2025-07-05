@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
@@ -38,14 +37,6 @@ const Navigation = () => {
               }`}
             >
               Blog
-            </Link>
-            <Link 
-              to="/admin" 
-              className={`text-sm font-medium transition-colors duration-200 ${
-                isActive('/admin') ? 'text-purple-600' : 'text-gray-600 hover:text-purple-600'
-              }`}
-            >
-              Admin
             </Link>
           </div>
           

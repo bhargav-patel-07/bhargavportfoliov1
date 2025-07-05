@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Hero from '@/components/Hero';
 import { useEffect, useState } from 'react';
-import { mockBlogPosts } from '@/data/mockData';
 import { supabase } from '../lib/supabaseClient';
 
 const defaultProfile = {
@@ -77,7 +76,7 @@ const BlogPost = () => {
           
           <header className="mb-8">
             <div className="flex flex-wrap gap-2 mb-4">
-              {post.tags.map((tag, index) => (
+              {(post.tags || []).map((tag, index) => (
                 <span 
                   key={index}
                   className="px-3 py-1 text-sm font-medium bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 rounded-full"

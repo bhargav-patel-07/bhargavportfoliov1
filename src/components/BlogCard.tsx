@@ -20,11 +20,11 @@ const BlogCard = ({ post }: BlogCardProps) => {
     <Link to={`/blog/${post.id}`}>
       <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border-0 shadow-lg liquid-glass-effect">
         {post.image && (
-          <div className="relative overflow-hidden rounded-t-lg">
+          <div className="relative overflow-hidden rounded-t-lg flex justify-center items-center">
             <img 
-              src={`https://images.unsplash.com/${post.image}?auto=format&fit=crop&w=600&q=80`}
+              src={post.image}
               alt={post.title}
-              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+              className="max-w-full max-h-80 group-hover:scale-105 transition-transform duration-300"
             />
           </div>
         )}
@@ -45,11 +45,14 @@ const BlogCard = ({ post }: BlogCardProps) => {
           <CardDescription className="text-gray-600 line-clamp-2 josefin-sans-font">
             {post.excerpt}
           </CardDescription>
+          <div className="text-gray-300 mt-2 text-sm line-clamp-3 josefin-sans-font">
+            {post.content}
+          </div>
         </CardHeader>
         
         <CardContent>
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag, index) => (
+            {(post.tags || []).map((tag, index) => (
               <span 
                 key={index}
                 className="px-2 py-1 text-xs font-medium bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 rounded-full"

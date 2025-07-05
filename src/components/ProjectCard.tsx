@@ -1,6 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ExternalLink, Github } from 'lucide-react';
+import React from 'react';
 
 interface Project {
   id: string;
@@ -18,49 +16,25 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg liquid-glass-effect">
-      <div className="relative overflow-hidden rounded-t-lg">
-        <img 
-          src={`https://images.unsplash.com/${project.image}?auto=format&fit=crop&w=600&q=80`}
-          alt={project.title}
-          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    <div className="flex flex-col justify-between bg-white/10 border border-white/20 rounded-xl p-6 shadow transition-all duration-200 hover:scale-105 hover:border-purple-500 cursor-pointer w-full max-w-xs min-h-[350px] max-h-[350px]">
+      {/* Title */}
+      <h2 className="text-2xl font-bold text-center text-white mb-2 truncate">{project.title}</h2>
+      {/* Description */}
+      <p className="text-gray-300 text-left flex-1 overflow-hidden text-ellipsis mb-4">{project.description}</p>
+      {/* Buttons row at the bottom, always inside the card */}
+      <div className="flex justify-between w-full gap-2">
+        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="w-1/2">
+          <button className="w-full bg-purple-500 text-white px-2 py-2 rounded-lg hover:bg-purple-600 transition text-sm whitespace-nowrap">
+            View Project
+          </button>
+        </a>
+        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="w-1/2">
+          <button className="w-full bg-gray-800 text-white px-2 py-2 rounded-lg hover:bg-gray-700 transition text-sm whitespace-nowrap">
+            GitHub
+          </button>
+        </a>
       </div>
-      
-      <CardHeader>
-        <CardTitle className="text-xl font-bold text-white libertinus-math-regular">{project.title}</CardTitle>
-        <CardDescription className="text-gray-600">{project.description}</CardDescription>
-      </CardHeader>
-      
-      <CardContent>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech, index) => (
-            <span 
-              key={index}
-              className="px-3 py-1 text-xs font-medium bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 rounded-full"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        
-        <div className="flex gap-3">
-          {project.githubUrl && (
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
-              <Github className="w-4 h-4" />
-              Code
-            </Button>
-          )}
-          {project.liveUrl && (
-            <Button size="sm" className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-              <ExternalLink className="w-4 h-4" />
-              Live Demo
-            </Button>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+    </div>
   );
 };
 
