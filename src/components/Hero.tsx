@@ -87,40 +87,35 @@ const Hero = ({ profile }: { profile: any }) => {
               }
             >
               <h3 className="text-xl font-bold text-white mb-4">{section.label}</h3>
-              <div className="relative pl-6">
-                {/* Vertical line for the whole timeline */}
-                <div className="absolute left-4 top-0 h-full w-px bg-gray-400 z-0"></div>
-                <ul className="relative z-10">
-                  {profile[section.key]?.map((item: any, idx: number) => (
-                    <li key={idx} className="flex items-start gap-4 mb-6">
-                      <div className="relative z-10">
-                        <img
-                          src={item.icon_url}
-                          alt="icon"
-                          className="h-8 w-8 rounded-full border-2 border-white object-cover bg-white"
-                        />
+              <ul className="relative z-10">
+                {profile[section.key]?.map((item: any, idx: number) => (
+                  <li key={idx} className="flex items-center gap-4 mb-6 relative">
+                    <div className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center mx-auto">
+                      <img
+                        src={item.icon_url}
+                        alt="icon"
+                        className="w-10 h-10 object-cover rounded-full"
+                      />
+                    </div>
+                    <div className="flex-1 pl-4">
+                      <div className="font-semibold text-white text-base whitespace-nowrap truncate overflow-hidden">
+                        {section.key === 'education' ? item.course : 
+                         section.key === 'experience' ? item.position : 
+                         item.title}
                       </div>
-                      <div>
-                        <div className="font-semibold text-white text-base">
-                          {section.key === 'education' ? item.course : 
-                           section.key === 'experience' ? item.position : 
-                           item.title}
-                        </div>
-                        <div className="text-sm text-purple-300">
-                          {section.key === 'education' ? item.institution_name : 
-                           section.key === 'experience' ? item.company_name : 
-                           item.institution_name}
-                        </div>
-                        <div className="text-xs text-gray-300">{item.description}</div>
-                        <div className="text-xs text-gray-400 mb-1">
-                          {item.start_date} - {item.end_date}
-                        </div>
-
+                      <div className="text-sm text-purple-300">
+                        {section.key === 'education' ? item.institution_name : 
+                         section.key === 'experience' ? item.company_name : 
+                         item.institution_name}
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      <div className="text-xs text-gray-300">{item.description}</div>
+                      <div className="text-xs text-gray-400 mb-1">
+                        {item.start_date} - {item.end_date}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

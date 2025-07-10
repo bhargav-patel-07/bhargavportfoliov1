@@ -41,7 +41,7 @@ const Blog = () => {
         className="absolute inset-0 h-full w-full stroke-white/10"
       />
       
-      <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 ml-24 md:ml-32">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="text-5xl font-bold text-white mb-6">

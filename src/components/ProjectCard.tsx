@@ -16,7 +16,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <div className="flex flex-col justify-between bg-white/10 border border-white/20 rounded-xl p-6 shadow transition-all duration-200 hover:scale-105 hover:border-purple-500 cursor-pointer w-full max-w-xs min-h-[350px] max-h-[350px]">
+    <div className="flex flex-col justify-between bg-white/10 border  border-white/20 rounded-xl p-6 shadow transition-all duration-200 hover:scale-105 hover:border-purple-500 cursor-pointer w-full max-w-xs min-h-[350px] max-h-[350px]">
       {/* Title */}
       <h2 className="text-2xl font-bold text-center text-white mb-2 truncate">{project.title}</h2>
       {/* Description */}

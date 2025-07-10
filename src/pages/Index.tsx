@@ -202,7 +202,7 @@ const Index = () => {
         className="absolute inset-0 h-full w-full stroke-white/10"
       />
       {/* Centered Welcome + TechStack Section */}
-      <div className="relative z-20 flex flex-col items-center justify-center mx-auto mt-8 mb-4 max-w-4xl min-h-[260px] w-full bg-transparent">
+      <div className="relative z-20 flex flex-col items-center justify-center mx-auto mt-8 mb-4 max-w-4xl min-h-[260px] w-full bg-transparent ml-24 md:ml-32">
         <div className="bg-white/10 rounded-2xl p-8 shadow-xl max-w-xl mx-auto mt-10">
           {profileImage && (
             <div className="flex justify-center mb-4">
@@ -220,7 +220,7 @@ const Index = () => {
         </div>
       </div>
       {/* Main Content - Only Hero for Home */}
-      <div className="relative z-10">
+      <div className="relative z-10 ml-24 md:ml-32">
         <Hero profile={profile} />
         {/* Social Links and CV Button */}
         

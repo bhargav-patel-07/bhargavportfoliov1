@@ -77,7 +77,7 @@ const Products = () => {
         y={-1}
         className="absolute inset-0 h-full w-full stroke-white/10 z-0"
       />
-      <main className="relative z-10 w-full">
+      <main className="relative z-10 w-full ml-24 md:ml-32">
         <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
