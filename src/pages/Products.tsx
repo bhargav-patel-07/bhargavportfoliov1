@@ -30,14 +30,16 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       {/* Buttons row at the bottom, always inside the card */}
       <div className="flex justify-between w-full gap-2">
         <a href={project.live_url} target="_blank" rel="noopener noreferrer" className="w-[48%]">
-          <button className="w-full bg-purple-500 text-white px-2 py-2 rounded-lg hover:bg-purple-600 transition text-sm whitespace-nowrap">
-            View Project
-          </button>
+        <button className="px-8 py-2 rounded-xl border-2 border-blue-400 bg-transparent  hover:text-white transition-all duration-200">
+  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold ">
+    Live 
+  </span>
+</button>
         </a>
         <a href={project.github_url} target="_blank" rel="noopener noreferrer" className="w-[48%]">
-          <button className="w-full bg-gray-800 text-white px-2 py-2 rounded-lg hover:bg-gray-700 transition text-sm whitespace-nowrap">
-            GitHub
-          </button>
+        <button className="px-8 py-2 rounded-xl border-2 border-black text-black-400 font-semibold bg-transparent hover:bg-black hover:text-white transition-all duration-200">
+  Github
+</button>
         </a>
       </div>
     </div>
@@ -77,7 +79,7 @@ const Products = () => {
         y={-1}
         className="absolute inset-0 h-full w-full stroke-white/10 z-0"
       />
-      <main className="relative z-10 w-full ml-24 md:ml-32">
+      <main className="relative z-10 w-full md:ml-32">
         <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
@@ -97,7 +99,8 @@ const Products = () => {
         </div>
       </main>
       {/* Floating Dock - Vertical, 24px from left side, only on desktop */}
-      <div className="fixed left-6 top-1/2 z-50 -translate-y-1/2 hidden md:flex flex-col items-center">
+      <div className="fixed left-6 top-1/2 z-50 -translate-y-1/2 hidden md:flex flex-col items-center           hover:border-yellow-400
+">
         <FloatingDock 
           items={dockItems}
           desktopClassName="liquid-glass-effect bg-gray-900/80 backdrop-blur-md border border-gray-700"
@@ -105,7 +108,7 @@ const Products = () => {
         />
       </div>
       {/* Floating Dock - Horizontal, bottom center, only on mobile */}
-      <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 flex md:hidden justify-center w-full px-4">
+      <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 flex md:hidden justify-center w-full px-4 ">
         <FloatingDock 
           items={dockItems}
           desktopClassName="liquid-glass-effect bg-gray-900/80 backdrop-blur-md border border-gray-700"

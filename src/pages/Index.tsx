@@ -1,8 +1,7 @@
 import { GridPattern } from '@/components/ui/grid-pattern';
 import Hero from '@/components/Hero';
 import { FloatingDock } from '@/components/FloatingDock';
-import { House, Info, Monitor, User, Package, Eye, X as XIcon } from 'lucide-react';
-import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
+import { House, Info, Monitor, User, Package, Eye } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { TechStack } from '../components/TechStack';
 import { supabase } from '../lib/supabaseClient';
@@ -25,7 +24,6 @@ const defaultProfile = {
   certificates: []
 };
 
-const platforms = ["github", "slack", "x", "linkedin", "discord", "email"];
 
 const Index = () => {
   const [profile, setProfile] = useState(defaultProfile);
@@ -180,7 +178,7 @@ const Index = () => {
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-400 mx-auto"></div>
-          <p className="mt-4 text-lg">Loading your portfolio...</p>
+          <p className="mt-4 text-lg">Welcome to Bhargav's portfolio...</p>
         </div>
       </div>
     );
@@ -202,7 +200,7 @@ const Index = () => {
         className="absolute inset-0 h-full w-full stroke-white/10"
       />
       {/* Centered Welcome + TechStack Section */}
-      <div className="relative z-20 flex flex-col items-center justify-center mx-auto mt-8 mb-4 max-w-4xl min-h-[260px] w-full bg-transparent ml-24 md:ml-32">
+      <div className="relative z-20 flex flex-col items-center justify-center mx-auto mt-8 mb-4 max-w-4xl min-h-[260px] w-full bg-transparent">
         <div className="bg-white/10 rounded-2xl p-8 shadow-xl max-w-xl mx-auto mt-10">
           {profileImage && (
             <div className="flex justify-center mb-4">
@@ -220,7 +218,7 @@ const Index = () => {
         </div>
       </div>
       {/* Main Content - Only Hero for Home */}
-      <div className="relative z-10 ml-24 md:ml-32">
+      <div className="relative z-10 md:ml-32">
         <Hero profile={profile} />
         {/* Social Links and CV Button */}
         

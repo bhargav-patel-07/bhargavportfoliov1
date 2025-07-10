@@ -39,6 +39,7 @@ const FloatingDockMobile = ({
   items: DockItem[];
   className?: string;
 }) => {
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   
   return (
@@ -55,9 +56,9 @@ const FloatingDockMobile = ({
               <Link
                 to={item.href}
                 className={`
-                  w-14 h-14 rounded-full flex items-center justify-center
-                  border border-transparent
-                  transition-all duration-200
+                  w-12 h-12 rounded-full flex items-center justify-center
+                  border transition-all duration-200
+                  ${isActive ? 'border-yellow-400 bg-yellow-900/20 shadow-lg' : 'border-transparent bg-black'}
                   hover:border-yellow-400
                   group
                 `}

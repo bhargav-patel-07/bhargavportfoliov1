@@ -21,7 +21,7 @@ const Hero = ({ profile }: { profile: any }) => {
     { icon: Linkedin, href: profile.socialLinks?.linkedin || "#", label: "LinkedIn" },
     { icon: Github, href: profile.socialLinks?.github || "#", label: "GitHub" },
     { icon: MessageCircle, href: profile.socialLinks?.discord || "#", label: "Discord" },
-    { icon: Twitter, href: profile.socialLinks?.twitter || "#", label: "X (Twitter)" },
+    { icon: Twitter, href: profile.socialLinks?.twitter || "https://x.com/Bhargav_0710", label: "x" },
     { icon: Slack, href: profile.socialLinks?.slack || "#", label: "Slack" },
   ];
 
@@ -63,7 +63,7 @@ const Hero = ({ profile }: { profile: any }) => {
           <a href="/projects" className="px-8 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-200 transform hover:scale-105">
             View My Work
           </a>
-          <a href={profile.socialLinks?.twitter || "https://x.com/your_x_profile"} target="_blank" rel="noopener noreferrer" className="px-8 py-3 border border-purple-400 text-purple-400 font-semibold rounded-lg hover:bg-purple-400 hover:text-white transition-all duration-200">
+          <a href={profile.socialLinks?.twitter || "https://x.com/Bhargav_0710"} target="_blank" rel="noopener noreferrer" className="px-8 py-3 border border-purple-400 text-purple-400 font-semibold rounded-lg hover:bg-purple-400 hover:text-white transition-all duration-200">
             Get In Touch
           </a>
           <a href={profile.cvLink || "#"} target="_blank" rel="noopener noreferrer" className="px-8 py-3 border border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-400 hover:text-white transition-all duration-200 flex items-center justify-center">
@@ -72,7 +72,7 @@ const Hero = ({ profile }: { profile: any }) => {
         </div>
         
         {/* Profile Timeline Sections: Education, Experience, Certificates */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {[
             {key: 'education', label: 'Education'}, 
             {key: 'experience', label: 'Experience'}, 
@@ -88,13 +88,13 @@ const Hero = ({ profile }: { profile: any }) => {
             >
               <h3 className="text-xl font-bold text-white mb-4">{section.label}</h3>
               <ul className="relative z-10">
-                {profile[section.key]?.map((item: any, idx: number) => (
+                {profile[section.key]?.slice().reverse().map((item: any, idx: number) => (
                   <li key={idx} className="flex items-center gap-4 mb-6 relative">
-                    <div className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center mx-auto">
+                    <div className="w-28 h-16 flex items-center justify-center mx-auto">
                       <img
                         src={item.icon_url}
                         alt="icon"
-                        className="w-10 h-10 object-cover rounded-full"
+                        className="max-w-full max-h-full object-contain"
                       />
                     </div>
                     <div className="flex-1 pl-4">

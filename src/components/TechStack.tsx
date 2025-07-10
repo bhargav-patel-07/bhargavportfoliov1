@@ -36,7 +36,10 @@ export function TechStack() {
           <img
             src={tech.icon_url}
             alt={tech.name}
-            onError={(e) => { e.target.src = '/default-icon.png'; }}
+            onError={(e) => { 
+              const target = e.target as HTMLImageElement;
+              target.src = '/default-icon.png';
+            }}
             className="w-5 h-5 mr-2"
           />
           <span className="font-semibold text-sm whitespace-nowrap">{tech.name}</span>
