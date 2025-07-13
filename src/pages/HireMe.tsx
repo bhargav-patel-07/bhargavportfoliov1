@@ -6,8 +6,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { CheckCircle, Clock, DollarSign, Users } from 'lucide-react';
 import { FloatingDock } from '@/components/FloatingDock';
 import { House, Info, Monitor, User, Package } from 'lucide-react';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 const HireMe = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
   const dockItems = [
     { title: 'Home', icon: <House className="h-4 w-4" />, href: '/' },
     { title: 'Projects', icon: <Monitor className="h-4 w-4" />, href: '/projects' },
@@ -38,6 +49,47 @@ const HireMe = () => {
     { icon: Clock, value: "5+", label: "Years Experience" },
     { icon: Users, value: "2+", label: "Years Corporate Experience" }
   ];
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Replace these with your actual EmailJS credentials
+      const result = await emailjs.send(
+        'service_moyuigx',
+        'template_tsxpegx',
+        {
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          title: formData.message,
+        },
+        'WubXtcoBGx7qU8it'
+      );
+
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', company: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Email send error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden pb-32">
@@ -115,30 +167,75 @@ const HireMe = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                    <Input className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400" placeholder="Your name" />
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                      <Input 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400" 
+                        placeholder="Your name" 
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                      <Input 
+                        type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400" 
+                        placeholder="your@email.com" 
+                        required
+                      />
+                    </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                    <Input type="email" className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400" placeholder="your@email.com" />
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Company Name/website</label>
+                    <Input 
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400" 
+                      placeholder="e.g. www.ai" 
+                    />
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Company Name/website</label>
-                  <Input className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400" placeholder="e.g. www.ai" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Compose Message</label>
-                  <Textarea 
-                    className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 min-h-[120px]" 
-                    placeholder="Tell me about your project, timeline, and requirements..."
-                  />
-                </div>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3">
-                  Send Message
-                </Button>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Compose Message</label>
+                    <Textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 min-h-[120px]" 
+                      placeholder="Tell me about your project, timeline, and requirements..."
+                      required
+                    />
+                  </div>
+                  
+                  {/* Status Messages */}
+                  {submitStatus === 'success' && (
+                    <div className="p-4 bg-green-600/20 border border-green-500/50 rounded-lg text-green-400 text-center">
+                      Message sent successfully! I'll get back to you soon.
+                    </div>
+                  )}
+                  
+                  {submitStatus === 'error' && (
+                    <div className="p-4 bg-red-600/20 border border-red-500/50 rounded-lg text-red-400 text-center">
+                      Failed to send message. Please try again or contact me directly.
+                    </div>
+                  )}
+                  
+                  <Button 
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isLoading ? 'Sending...' : 'Send Message'}
+                  </Button>
+                </form>
               </CardContent>
             </Card>
           </div>
