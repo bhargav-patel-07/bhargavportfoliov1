@@ -4,6 +4,7 @@ import { FloatingDock } from '@/components/FloatingDock';
 import { House, Info, Monitor, User, Package } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient"; // adjust path if needed
+import { Link } from '@radix-ui/react-navigation-menu';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -44,10 +45,10 @@ const Projects = () => {
         <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h1 className="text-5xl font-bold text-white mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
                 Some Cool Stuff I've <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Built</span>
               </h1>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
                 A collection of projects I've worked on, ranging from web applications to mobile apps and everything in between.
               </p>
             </div>

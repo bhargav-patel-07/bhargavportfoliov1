@@ -83,10 +83,10 @@ const Products = () => {
         <div className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <h1 className="text-5xl mb-5 font-bold">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl mb-5 font-bold">
                 Some Stuff Going to <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent font-sans not-italic">Production Level</span>
               </h1>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto josefin-sans-font">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto josefin-sans-font">
                 Discover the digital products I've built to solve real-world problems and enhance productivity.
               </p>
             </div>

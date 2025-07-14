@@ -1,6 +1,7 @@
 import { Github, Linkedin, MessageCircle, Slack, Twitter } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient"; // adjust path if needed
+import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 
 const Hero = ({ profile }: { profile: any }) => {
   const [profileState, setProfileState] = useState({ name: "", bio: "" });
@@ -29,6 +30,7 @@ const Hero = ({ profile }: { profile: any }) => {
     <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="text-center max-w-4xl mx-auto">
         <div className="text-center mt-10">
+          
           <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-2">
             Hi, I'm <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-blue-500 mb-7 bg-clip-text text-transparent">{profileState.name}</span>
           </h1>
