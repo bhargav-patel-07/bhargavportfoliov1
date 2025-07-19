@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Loader = () => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className="w-[140px] h-[140px] sm:w-[100px] sm:h-[100px]">
       <div id="ghost">
         <div id="red">
           <div id="pupil" />
@@ -50,6 +50,11 @@ const StyledWrapper = styled.div`
   #ghost {
     position: relative;
     scale: 0.8;
+  }
+  @media (max-width: 640px) {
+    #ghost {
+      scale: 0.5;
+    }
   }
 
   #red {
