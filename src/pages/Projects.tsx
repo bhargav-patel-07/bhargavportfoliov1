@@ -1,4 +1,4 @@
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCard, { TechnologyBadgeList } from '@/components/ProjectCard';
 import { GridPattern } from '@/components/ui/grid-pattern';
 import { FloatingDock } from '@/components/FloatingDock';
 import { House, Info, Monitor, User, Package } from 'lucide-react';
@@ -8,10 +8,11 @@ import { Link } from '@radix-ui/react-navigation-menu';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+  const [techDetails, setTechDetails] = useState([]);
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const { data, error } = await supabase.from("projects").select("*");
+      const { data, error } = await supabase.from("projects").select("*, technologies");
       if (error) {
         console.error("Error fetching projects:", error);
         setProjects([]);
@@ -20,6 +21,14 @@ const Projects = () => {
       }
     };
     fetchProjects();
+  }, []);
+
+  useEffect(() => {
+    const fetchTechDetails = async () => {
+      const { data, error } = await supabase.from('technologies').select('*');
+      if (!error) setTechDetails(data || []);
+    };
+    fetchTechDetails();
   }, []);
 
   const dockItems = [
@@ -55,7 +64,12 @@ const Projects = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
               {projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  technologies={project.technologies}
+                  techDetails={techDetails}
+                />
               ))}
             </div>
           </div>

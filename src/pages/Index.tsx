@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import { TechStack } from '../components/TechStack';
 import { supabase } from '../lib/supabaseClient';
 import { TypewriterEffect, TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-import Loader from "@/components/ui/loader";
 import { motion } from "framer-motion";
+import Loader from "@/components/ui/loader";
 
 const defaultProfile = {
   name: '',
@@ -162,10 +162,19 @@ const Index = () => {
     fetchAllData();
   }, []);
 
+  // Visitor counter: POST to /api/visit on load, then fetch count
   useEffect(() => {
-    const count = parseInt(localStorage.getItem('visitorCount') || '0', 10) + 1;
-    localStorage.setItem('visitorCount', count.toString());
-    setVisitorCount(count);
+    const updateVisitorCount = async () => {
+      try {
+        await fetch('/api/visit', { method: 'POST' });
+        const res = await fetch('/api/visit');
+        const data = await res.json();
+        if (typeof data.count === 'number') setVisitorCount(data.count);
+      } catch (e) {
+        // fallback: do nothing
+      }
+    };
+    updateVisitorCount();
   }, []);
 
   const dockItems = [
@@ -176,29 +185,11 @@ const Index = () => {
     { title: 'Hire Me', icon: <User className="h-4 w-4" />, href: '/hire' },
   ];
 
+  // Remove Loader usage in the loading state, and instead show a modern welcome section
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center px-4 py-12 overflow-hidden">
-        <div className="flex flex-col items-center justify-center min-h-[350px] w-full gap-6">
-          <Loader />
-          <div className="text-center mt-8">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 2.0, ease: "easeOut" }}
-            >
-              <div className="text-5xl sm:text-6xl md:text-7xl font-bold">
-                <TypewriterEffectSmooth
-                  words={[
-                    { text: "Welcome to", className: "text-white" },
-                    { text: "bhargav's", className: "bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent font-bold" },
-                    { text: "portfolio", className: "text-white" }
-                  ]}
-                />
-              </div>
-            </motion.div>
-          </div>
-        </div>
+        <Loader />
       </div>
     );
   }
